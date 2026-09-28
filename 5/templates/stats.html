@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Статистика{% endblock %}
+{% block content %}
+<h2>Статистика корзины</h2>
+
+<div style="display:flex; gap:16px; flex-wrap:wrap;">
+    <div style="flex:1; min-width:200px; background:#fff; padding:20px; border-radius:8px; text-align:center;">
+        <div style="font-size:13px; color:#7f8c8d;">Всего товаров (шт.)</div>
+        <div style="font-size:32px; font-weight:bold;">{{ total_qty }}</div>
+    </div>
+    <div style="flex:1; min-width:200px; background:#fff; padding:20px; border-radius:8px; text-align:center;">
+        <div style="font-size:13px; color:#7f8c8d;">Уникальных позиций</div>
+        <div style="font-size:32px; font-weight:bold;">{{ unique_count }}</div>
+    </div>
+    <div style="flex:1; min-width:200px; background:#fff; padding:20px; border-radius:8px; text-align:center;">
+        <div style="font-size:13px; color:#7f8c8d;">Итоговая сумма</div>
+        <div style="font-size:32px; font-weight:bold;">{{ total_sum|price }}</div>
+    </div>
+</div>
+
+<p style="margin-top:20px;"><a href="{{ url_for('cart') }}" class="btn btn-primary">Перейти в корзину →</a></p>
+{% endblock %}
