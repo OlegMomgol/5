@@ -1,9 +1,8 @@
 from flask import Flask, render_template, session, redirect, url_for, request, flash
 
 app = Flask(__name__)
-app.secret_key = "dev-secret-key-change-me"  # нужен для работы сессии
+app.secret_key = "dev-secret-key-change-me"  
 
-# Каталог товаров (в реальном проекте — из БД)
 PRODUCTS = [
     {"id": 1, "name": "Ноутбук Lenovo IdeaPad", "price": 54990, "category": "Электроника"},
     {"id": 2, "name": "Смартфон iphone 18",   "price": 219900, "category": "Электроника"},
