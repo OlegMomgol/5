@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Новая задача</h2>
+<form method="post" class="task-form">
+    <label>Название *
+        <input type="text" name="title" required maxlength="200">
+    </label>
+    <label>Описание
+        <textarea name="description" rows="3" maxlength="500"></textarea>
+    </label>
+    <label>Категория
+        <input type="text" name="category" placeholder="Например: Учёба" maxlength="100">
+    </label>
+    <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <a class="btn" href="{{ url_for('index') }}">Отмена</a>
+    </div>
+</form>
+{% endblock %}

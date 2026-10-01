@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="stats">
+    <div class="stat-card">
+        <span class="stat-number">{{ total }}</span>
+        <span class="stat-label">Всего</span>
+    </div>
+    <div class="stat-card stat-done">
+        <span class="stat-number">{{ done_count }}</span>
+        <span class="stat-label">Выполнено</span>
+    </div>
+    <div class="stat-card stat-undone">
+        <span class="stat-number">{{ undone_count }}</span>
+        <span class="stat-label">В работе</span>
+    </div>
+</section>
+
+<section class="filters">
+    <form method="get" class="filter-form">
+        <label>
+            Категория:
+            <select name="category" onchange="this.form.submit()">
+                <option value="">Все категории</option>
+                {% for c in categories %}
+                    <option value="{{ c }}" {% if c == current_category %}selected{% endif %}>{{ c }}</option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label>
+            Сортировка:
+            <select name="sort" onchange="this.form.submit()">
+                <option value="" {% if not current_sort %}selected{% endif %}>По умолчанию</option>
+                <option value="undone" {% if current_sort == 'undone' %}selected{% endif %}>Сначала невыполненные</option>
+                <option value="done" {% if current_sort == 'done' %}selected{% endif %}>Сначала выполненные</option>
+            </select>
+        </label>
+
+        {% if current_category %}
+            <input type="hidden" name="category" value="{{ current_category }}">
+        {% endif %}
+    </form>
+</section>
+
+<section class="tasks">
+    {% if tasks %}
+        {% for task in tasks %}
+        <article class="task-card {% if task.done %}task-done{% endif %}">
+            <div class="task-main">
+                <h3>{{ task.title }}</h3>
+                {% if task.description %}
+                    <p>{{ task.description }}</p>
+                {% endif %}
+                <span class="badge">{{ task.category }}</span>
+            </div>
+            <div class="task-actions">
+                <form method="post" action="{{ url_for('toggle', task_id=task.id) }}">
+                    <button class="btn btn-toggle" type="submit">
+                        {% if task.done %}↩ Вернуть{% else %}✓ Выполнено{% endif %}
+                    </button>
+                </form>
+                <a class="btn btn-edit" href="{{ url_for('edit', task_id=task.id) }}">✎</a>
+                <form method="post" action="{{ url_for('delete', task_id=task.id) }}"
+                      onsubmit="return confirm('Удалить задачу?');">
+                    <button class="btn btn-delete" type="submit"></button>
+                </form>
+            </div>
+        </article>
+        {% endfor %}
+    {% else %}
+        <p class="empty">Задач пока нет. <a href="{{ url_for('add') }}">Добавить первую</a>.</p>
+    {% endif %}
+</section>
+
+{% endblock %}

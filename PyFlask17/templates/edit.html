@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Редактирование задачи</h2>
+<form method="post" class="task-form">
+    <label>Название *
+        <input type="text" name="title" value="{{ task.title }}" required maxlength="200">
+    </label>
+    <label>Описание
+        <textarea name="description" rows="3" maxlength="500">{{ task.description }}</textarea>
+    </label>
+    <label>Категория
+        <input type="text" name="category" value="{{ task.category }}" maxlength="100">
+    </label>
+    <label class="checkbox">
+        <input type="checkbox" name="done" {% if task.done %}checked{% endif %}>
+        Выполнено
+    </label>
+    <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        <a class="btn" href="{{ url_for('index') }}">Отмена</a>
+    </div>
+</form>
+{% endblock %}
