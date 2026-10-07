@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Счётчик посещений</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f4f8;
+        }
+        .card {
+            background: white;
+            padding: 40px 60px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 { color: #2c3e50; }
+        .count {
+            font-size: 64px;
+            font-weight: bold;
+            color: #3498db;
+            margin: 20px 0;
+        }
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #e74c3c;
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover { background: #c0392b; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Счётчик посещений</h1>
+        <div class="count">{{ visits }}</div>
+        <p>Вы зашли на эту страницу <b>{{visits}}</b> раз(а).</p>
+        <form action="{{ url_for('reset') }}" method="get">
+            <button type="submit">Сбросить счётчик</button>
+        </form>
+    </div>
+</body>
+</html>
