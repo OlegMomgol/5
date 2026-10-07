@@ -1,0 +1,30 @@
+body {
+    transition: background-color .2s, color .2s;
+}
+
+.task-card {
+    border-left: 4px solid transparent;
+    transition: transform .15s;
+}
+
+.task-card:hover {
+    transform: translateX(2px);
+}
+
+.task-done {
+    opacity: .6;
+}
+
+.badge.priority-low {
+    background: #6c757d;
+}
+.badge.priority-medium {
+    background: #0d6efd;
+}
+.badge.priority-high {
+    background: #dc3545;
+}
+
+[data-bs-theme="dark"] .card {
+    background-color: #1e1e1e;
+}
